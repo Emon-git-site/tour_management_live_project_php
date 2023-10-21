@@ -1,4 +1,5 @@
 <?php
+require_once "includes/connec.php";
 session_start();
 if(!$_SESSION['authenticate_user_name']){
   header('location: index.php');
@@ -64,7 +65,23 @@ if(!$_SESSION['authenticate_user_name']){
                       </tr>
                     </thead>
                     <tbody>
-              
+                    <?php
+                    $select_tourpackage_query = "SELECT * FROM `tourpackages` ";
+                    $select_tourpackage_query_run = mysqli_query($con, $select_tourpackage_query);
+                     $count = 1;
+                     while($row = mysqli_fetch_assoc($select_tourpackage_query_run)){ ?>
+                      <tr>
+                        <td><?= $count ?></td>
+                        <td><?= $row['packagename'] ?></td>
+                        <td><?= $row['packagetype'] ?></td>
+                        <td><?= $row['packagelocation'] ?></td>
+                        <td><?= $row['packageprice'] ?></td>
+                        <td><?= $row['createdate'] ?></td>
+                        <td><a href="update_package.php?id=<?= $row['id']?>" class="btn btn-primary">UPDATE</a></td>
+                        
+                      </tr>
+                   <?php $count++ ;  }  ?>
+                    
                     </tbody>
                   </table>
                 </div>

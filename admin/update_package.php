@@ -1,8 +1,13 @@
 <?php
+require_once "includes/connec.php";
 session_start();
 if(!$_SESSION['authenticate_user_name']){
   header('location: index.php');
+
 }
+$id = $_GET['id'];
+
+$_SESSION['package_id'] = $id;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +19,7 @@ if(!$_SESSION['authenticate_user_name']){
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Create Package</title>
+  <title>Update Package</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -34,9 +39,9 @@ if(!$_SESSION['authenticate_user_name']){
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Create Package</h1>
+            <h1 class="h3 mb-0 text-gray-800">Update Package</h1>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="manage_tour_packages.php">Manage Package</a></li>
+              <li class="breadcrumb-item"><a href="create_tour_package.php">Create Package</a></li>
               <li class="breadcrumb-item active" aria-current="page">Create</li>
             </ol>
           </div>
@@ -47,7 +52,7 @@ if(!$_SESSION['authenticate_user_name']){
               <?php
                 if(isset($_SESSION['message'])){ ?>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>hello!</strong> <?= $_SESSION['message']; ?>
+                    <?= $_SESSION['message']; ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -56,39 +61,49 @@ if(!$_SESSION['authenticate_user_name']){
                 }
                 ?>
                 <div class="card-body">
-                  <form action="functions/tourpackage.php" method="post" enctype="multipart/form-data">
+                <?php
+                  $select_query = "SELECT * FROM `tourpackages` WHERE `id`='$id' ";
+                  $select_query_run = mysqli_query($con, $select_query);
+                  $row = mysqli_fetch_assoc($select_query_run);
+                 ?>
+                  <form action="functions/package_update.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="package_name">Package Name</label>
-                      <input type="text" class="form-control" id="package_name" name="package_name" placeholder="Create Package">
+                      <input type="text" class="form-control" id="package_name" name="package_name" value="<?= $row['packagename'] ?>" ">
                     </div>
                     <div class="form-group">
                       <label for="package_type">Package Type</label>
-                      <input type="text" class="form-control" id="package_type" name="package_type" placeholder="Package Type eg-Family Package/Couple Package">
+                      <input type="text" class="form-control" id="package_type" name="package_type" value="<?= $row['packagetype'] ?>" >
                     </div>
                     <div class="form-group">
                       <label for="package_location">Package Location</label>
-                      <input type="text" class="form-control" id="package_location" name="package_location" placeholder="Package Location">
+                      <input type="text" class="form-control" id="package_location" name="package_location" value="<?= $row['packagelocation'] ?>">
                     </div>
                     <div class="form-group">
                       <label for="package_price">Package Price in USD</label>
-                      <input type="number" class="form-control" id="package_price" name="package_price" placeholder="Package Price in USD">
+                      <input type="number" class="form-control" id="package_price" name="package_price" value="<?= $row['packageprice'] ?>">
                     </div>
                     <div class="form-group">
                       <label for="package_features">Package Features</label>
-                      <input type="text" class="form-control" id="package_features" name="package_feature" placeholder="Package Features Eg-free Pickup-drop facility">
+                      <input type="text" class="form-control" id="package_features" name="package_feature" value="<?= $row['packagefeature'] ?>">
                     </div>
                     <div class="form-group">
                       <label for="package_details">Package Details</label>
-                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""> Package Details</textarea>             
+                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10"  ><?= $row['packagedetails'] ?></textarea>             
                      </div>
+                    <div class="form-group">
+                      <label for="package_details">Package Image&nbsp;&nbsp;</label>
+                      <img src="img/package_img/<?= $row['packkageimage'] ?>" alt="not shown" width="200px">
+                     </div>
+
                     <div class="form-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" name="package_image" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <label class="custom-file-label" for="customFile">Change Image</label>
                       </div>
                     </div>
 
-                    <button type="submit" name="create_btn" class="btn btn-primary">CREATE</button>
+                    <button type="submit" name="update_btn" class="btn btn-primary">UPDATE</button>
                     <button type="submit" class="btn btn-secondary">RESET</button>
                   </form>
                 </div>
