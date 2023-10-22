@@ -10,6 +10,7 @@ require_once "../includes/connec.php";
     $package_price = mysqli_escape_string($con, $_POST['package_price']);
     $package_feature = mysqli_escape_string($con, $_POST['package_feature']);
     $package_details = mysqli_escape_string($con, $_POST['package_details']);
+    $package_duration = mysqli_escape_string($con, $_POST['package_duration']);
     $package_image =  $_FILES['package_image']['name'];
 
     if(empty($package_image)){
@@ -25,7 +26,7 @@ require_once "../includes/connec.php";
         move_uploaded_file($temporary_image_name, "../img/package_img/$package_image");
         $GLOBALS['package_picture'] = $package_image ;
     }
-    $update_query = "UPDATE `tourpackages` SET `packagename`='$package_name',`packagetype`='$package_type',
+    $update_query = "UPDATE `tourpackages` SET `packagename`='$package_name',`packagetype`='$package_type', `packageduration`='$package_duration',
                    `packagelocation`='$package_location', `packageprice`='$package_price',`packagefeature`='$package_feature',
                    `packagedetails`='$package_details',`packkageimage`='$package_picture' WHERE `id` = '$id'" ;
     $update_query_run = mysqli_query($con, $update_query);

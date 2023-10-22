@@ -80,6 +80,10 @@ $_SESSION['package_id'] = $id;
                       <input type="text" class="form-control" id="package_location" name="package_location" value="<?= $row['packagelocation'] ?>">
                     </div>
                     <div class="form-group">
+                      <label for="package_duration">Package Duration</label>
+                      <input type="number" class="form-control" id="package_duration" name="package_duration" value="<?= $row['packageduration'] ?>">
+                    </div>
+                    <div class="form-group">
                       <label for="package_price">Package Price in USD</label>
                       <input type="number" class="form-control" id="package_price" name="package_price" value="<?= $row['packageprice'] ?>">
                     </div>

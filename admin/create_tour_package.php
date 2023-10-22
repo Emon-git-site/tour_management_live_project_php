@@ -70,6 +70,10 @@ if(!$_SESSION['authenticate_user_name']){
                       <input type="text" class="form-control" id="package_location" name="package_location" placeholder="Package Location">
                     </div>
                     <div class="form-group">
+                      <label for="package_duration">Package Duration</label>
+                      <input type="number" class="form-control" id="package_duration" name="package_duration" placeholder="Package Duration">
+                    </div>
+                    <div class="form-group">
                       <label for="package_price">Package Price in USD</label>
                       <input type="number" class="form-control" id="package_price" name="package_price" placeholder="Package Price in USD">
                     </div>
@@ -79,8 +83,9 @@ if(!$_SESSION['authenticate_user_name']){
                     </div>
                     <div class="form-group">
                       <label for="package_details">Package Details</label>
-                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""> Package Details</textarea>             
+                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""> </textarea>             
                      </div>
+                  
                     <div class="form-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" name="package_image" id="customFile">
