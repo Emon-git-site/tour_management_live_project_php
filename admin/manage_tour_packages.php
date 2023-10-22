@@ -37,7 +37,7 @@ if(!$_SESSION['authenticate_user_name']){
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Manage Tourpackages</h1>
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Package</a></li>
+              <li class="breadcrumb-item"><a href="create_tour_package.php">create package</a></li>
               <li class="breadcrumb-item active" aria-current="page">Manage</li>
             </ol>
           </div>
@@ -51,17 +51,28 @@ if(!$_SESSION['authenticate_user_name']){
                 <div class="card-header py-3 ">
                   <h6 class="m-0 font-weight-bold text-primary"></h6>
                 </div>
+                <?php
+                if(isset($_SESSION['message'])){ ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>hello!</strong> <?= $_SESSION['message']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div> <?php
+                    unset($_SESSION['message']);
+                }
+                ?>
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>#</th>
-                        <th>NAME`</th>
-                        <th>TYPE</th>
-                        <th>LOCATION</th>
-                        <th>PRICE</th>
-                        <th>CREATION DATE</th>
-                        <th>ACTION</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">NAME`</th>
+                        <th class="text-center">TYPE</th>
+                        <th class="text-center">LOCATION</th>
+                        <th class="text-center">PRICE</th>
+                        <th class="text-center">CREATION DATE</th>
+                        <th class="text-center">ACTION</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -71,13 +82,14 @@ if(!$_SESSION['authenticate_user_name']){
                      $count = 1;
                      while($row = mysqli_fetch_assoc($select_tourpackage_query_run)){ ?>
                       <tr>
-                        <td><?= $count ?></td>
-                        <td><?= $row['packagename'] ?></td>
-                        <td><?= $row['packagetype'] ?></td>
-                        <td><?= $row['packagelocation'] ?></td>
-                        <td><?= $row['packageprice'] ?></td>
-                        <td><?= $row['createdate'] ?></td>
-                        <td><a href="update_package.php?id=<?= base64_encode($row['id'])?>" class="btn btn-primary">UPDATE</a></td>
+                        <td class="text-center"><?= $count ?></td>
+                        <td class="text-center"><?= $row['packagename'] ?></td>
+                        <td class="text-center"><?= $row['packagetype'] ?></td>
+                        <td class="text-center"><?= $row['packagelocation'] ?></td>
+                        <td class="text-center"><?= $row['packageprice'] ?></td>
+                        <td class="text-center"><?= $row['createdate'] ?></td>
+                        <td class="text-center"><a href="update_package.php?id=<?= base64_encode($row['id'])?>" class="btn btn-primary">UPDATE</a>
+                        <a href="functions/delete_package.php?id=<?= base64_encode($row['id'])?>" class="btn btn-primary">DELETE</a></td>
                         
                       </tr>
                    <?php $count++ ;  }  ?>
