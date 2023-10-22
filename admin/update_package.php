@@ -5,7 +5,7 @@ if(!$_SESSION['authenticate_user_name']){
   header('location: index.php');
 
 }
-$id = $_GET['id'];
+$id = base64_decode($_GET['id']);
 
 $_SESSION['package_id'] = $id;
 ?>
@@ -93,7 +93,7 @@ $_SESSION['package_id'] = $id;
                      </div>
                     <div class="form-group">
                       <label for="package_details">Package Image&nbsp;&nbsp;</label>
-                      <img src="img/package_img/<?= $row['packkageimage'] ?>" alt="not shown" width="200px">
+                      <img src="img/package_img/<?= $row['packkageimage'] ?>" alt="not shown" width="200px" height="200px">
                      </div>
 
                     <div class="form-group">

@@ -77,7 +77,7 @@ if(!$_SESSION['authenticate_user_name']){
                         <td><?= $row['packagelocation'] ?></td>
                         <td><?= $row['packageprice'] ?></td>
                         <td><?= $row['createdate'] ?></td>
-                        <td><a href="update_package.php?id=<?= $row['id']?>" class="btn btn-primary">UPDATE</a></td>
+                        <td><a href="update_package.php?id=<?= base64_encode($row['id'])?>" class="btn btn-primary">UPDATE</a></td>
                         
                       </tr>
                    <?php $count++ ;  }  ?>
