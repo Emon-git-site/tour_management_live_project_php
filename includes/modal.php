@@ -9,19 +9,30 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+              <?php
+                if(isset($_SESSION['message'])){ ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>hello!</strong> <?= $_SESSION['message']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div> <?php
+                    unset($_SESSION['message']);
+                }
+                ?>
       <div class="modal-body">
-      <form>
+      <form action="functions/user_authentication.php" method="post">
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
       
-        <button type="submit" class="btn btn-primary">SignIn</button>
+        <button type="submit" name="signin_btn" class="btn btn-primary">SignIn</button>
       </form>
       </div>
       <div class="modal-footer">
@@ -42,27 +53,38 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+              <?php
+                if(isset($_SESSION['message'])){ ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>hello!</strong> <?= $_SESSION['message']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div> <?php
+                    unset($_SESSION['message']);
+                }
+                ?>
       <div class="modal-body">
-      <form>
+      <form action="functions/user_authentication.php" method="post">
         <div class="form-group">
           <label for="full_name">Full Name</label>
-          <input type="email" class="form-control" id="full_name" aria-describedby="emailHelp" placeholder="Enter Full name">
+          <input type="text" class="form-control" id="full_name" name="full_name" aria-describedby="emailHelp" placeholder="Enter Full name">
         </div>
         <div class="form-group">
           <label for="mobile_number">Mobile Number</label>
-          <input type="number" class="form-control" id="mobile_number" aria-describedby="emailHelp" placeholder="Enter Mobile Number">
+          <input type="number" class="form-control" id="mobile_number" name="mobile_number" aria-describedby="emailHelp" placeholder="Enter Mobile Number">
         </div>
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email Address">
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
       
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" name="user_register_btn" class="btn btn-primary">Register</button>
       </form>
       </div>
       <div class="modal-footer">

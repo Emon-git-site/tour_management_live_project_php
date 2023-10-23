@@ -9,17 +9,17 @@
 							<li><a href="issue_ticket.php">Issue Tickets</a></li>
 						</ul>
 						<ul>
-							<li><a href="#">Welcome: User</a></li>
-							<li><a href="#">Logout</a></li>
+							<?php 
+							require_once "includes/connec.php";
+							$email = $_SESSION['user_email'] ;
+							$select_query = "SELECT * FROM `user` WHERE `email` = '$email' ";
+							$select_query_run = mysqli_query($con, $select_query);
+							$row = mysqli_fetch_assoc($select_query_run);
+							?>
+							<li><a href="#">Welcome: <?= $row['fullname'] ?></a></li>
+							<li><a href="#" data-toggle="modal" data-target="#logoutModal_user" >Logout</a></li>
 						</ul>
 					</div>
-					<div class="col-lg-6 col-sm-6 col-6 header-top-right">
-						<div class="header-social">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
+				
 				</div>
 			</div>

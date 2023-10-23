@@ -10,7 +10,7 @@
          <li class="nav-item dropdown no-arrow">
              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
-                 <span class="ml-2 d-none d-lg-inline text-white small"><?= $_SESSION['authenticate_user_name']; ?></span>
+                 <span class="ml-2 d-none d-lg-inline text-white small"><?= $_SESSION['authenticate_admin_name']; ?></span>
              </a>
              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                  <a class="dropdown-item" href="#">
@@ -20,7 +20,7 @@
                
                 
                  <div class="dropdown-divider"></div>
-                 <a class="dropdown-item" href="functions/logout.php;" data-toggle="modal" data-target="#logoutModal">
+                 <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal_admin">
                      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                      Logout
                  </a>

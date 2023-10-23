@@ -11,13 +11,6 @@
 							<li><a class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#registration_modal" href="#">Register</a></li>
 						</ul>
 					</div>
-					<div class="col-lg-6 col-sm-6 col-6 header-top-right"> 
-						<div class="header-social">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
+
 				</div>
 			</div>

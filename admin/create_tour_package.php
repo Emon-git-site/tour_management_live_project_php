@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!$_SESSION['authenticate_user_name']){
+if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 }
 ?>
@@ -83,7 +83,7 @@ if(!$_SESSION['authenticate_user_name']){
                     </div>
                     <div class="form-group">
                       <label for="package_details">Package Details</label>
-                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""> </textarea>             
+                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""></textarea>             
                      </div>
                   
                     <div class="form-group">
@@ -107,7 +107,7 @@ if(!$_SESSION['authenticate_user_name']){
 
 
             <!-- Modal Logout -->
-            <?php require_once "includes/log_out.php" ?>
+            <?php require_once "includes/log_out_modal.php" ?>
 
           </div>
           <!---Container Fluid-->

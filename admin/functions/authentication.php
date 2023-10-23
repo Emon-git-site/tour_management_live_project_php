@@ -9,7 +9,7 @@ if(isset($_POST['login_btn'])){
     $login_query_run = mysqli_query($con, $login_query);
 
     if(mysqli_num_rows($login_query_run) >0){
-        $_SESSION['authenticate_user_name'] = $user_name ;
+        $_SESSION['authenticate_admin_name'] = $user_name ;
 
         header('location: ../dashboard.php');
 

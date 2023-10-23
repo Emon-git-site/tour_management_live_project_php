@@ -1,7 +1,7 @@
 <?php
 require_once "../includes/connec.php";
 session_start();
-if(!$_SESSION['authenticate_user_name']){
+if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 
 }

@@ -1,7 +1,7 @@
 <?php
 require_once "includes/connec.php";
 session_start();
-if(!$_SESSION['authenticate_user_name']){
+if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 
 }
@@ -121,7 +121,7 @@ $_SESSION['package_id'] = $id;
 
 
             <!-- Modal Logout -->
-            <?php require_once "includes/log_out.php" ?>
+            <?php require_once "includes/log_out_modal.php" ?>
 
           </div>
           <!---Container Fluid-->

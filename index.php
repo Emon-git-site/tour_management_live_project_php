@@ -1,5 +1,6 @@
 	<?php
 	require_once "includes/connec.php";
+	// error_reporting(0);
 	session_start();
 	?>
 	<!DOCTYPE html>
@@ -39,10 +40,10 @@
 	<body>
 		<header id="header">
 			<?php 
-			 if(!$_SESSION['user_email']){
-				require_once "includes/before_signin_header.php";
-			 }else{
-				require_once "includes/after_signin_header.php";
+			 if($_SESSION['user_email']){
+				 require_once "includes/after_signin_header.php";
+			}else{
+				 require_once "includes/before_signin_header.php";
 
 			 }
 			?>
@@ -86,6 +87,8 @@
 
 		<!-- modal start here -->
 		 <?php require_once "includes/modal.php" ?>
+		 <?php require_once "includes/logout_modal.php" ?>
+
 		<!-- modal end here -->
 		
 		<section class="destinations-area section-gap">

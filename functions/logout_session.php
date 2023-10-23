@@ -1,8 +1,8 @@
 <?php
 session_start();
-if(!$_SESSION['authenticate_admin_name']){
+if(!$_SESSION['user_email']){
     header('location: ../index.php');
   }
-  unset ($_SESSION['authenticate_admin_name']);
+  unset ($_SESSION['user_email']);
   header('location: ../index.php');
 ?>
