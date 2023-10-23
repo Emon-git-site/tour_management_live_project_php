@@ -66,7 +66,7 @@ if(!$_SESSION['authenticate_admin_name']){
 
                     <div class="form-group">
                       <label for="package_details">Package Details</label>
-                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""> Package Details</textarea>             
+                      <textarea class="form-control" id="package_details" name="package_details" rows="4" cols="10" placeholder=""></textarea>             
                      </div>
                     <button type="submit" class="btn btn-primary">UPDATE</button>
                   </form>

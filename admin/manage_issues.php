@@ -75,6 +75,8 @@ if(!$_SESSION['authenticate_admin_name']){
 
           <!-- Modal Logout -->
           <?php require_once "includes/log_out_modal.php" ?>
+          <!-- modal myprofile -->
+          <?php require_once "includes/log_out_modal.php" ?>
 
         </div>
         <!---Container Fluid-->

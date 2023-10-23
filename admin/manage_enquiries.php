@@ -14,7 +14,7 @@ if(!$_SESSION['authenticate_admin_name']){
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="img/logo/logo.png" rel="icon">
-  <title>Create Package</title>
+  <title>Manage Enquiries</title>
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -62,7 +62,35 @@ if(!$_SESSION['authenticate_admin_name']){
                       </tr>
                     </thead>
                     <tbody>
-              
+                    <?php
+                      require_once "../includes/connec.php";
+                      if(isset($_GET['id'])){
+                       $id = base64_decode($_GET['id']);
+                       $status =1;
+                        $update_query = "UPDATE `inquiry` SET `status`='$status' WHERE `id`= $id";
+                        $update_query_run = mysqli_query($con, $update_query); }
+                      // enquiry data show
+                      $select_query_data = "SELECT * FROM `inquiry`";
+                      $select_query_data_run = mysqli_query($con, $select_query_data);
+                    
+                      while($row = mysqli_fetch_assoc($select_query_data_run)){ ?>
+                          <tr>
+                              <td><?= $row['fullname'] ?></td>
+                              <td><?= $row['email'] ?></td>
+                              <td><?= $row['mobile'] ?></td>
+                              <td><?= $row['subject'] ?></td>
+                              <td><?= $row['description'] ?></td>
+                              <td><?= $row['postindate'] ?></td>
+                              <?php
+                              if($row['status'] == 0){ ?> <!-- Corrected the if statement here -->
+                                  <td><a href="?id=<?=base64_encode($row['id']) ?>" onclick="return confirm('Do you want to read ?')">pending</a></td>
+                                  <?php } else{ ?>
+                                    <td><a href="?id=<?=base64_encode($row['id']) ?>" >read</a></td>
+                              <?php } ?>
+                          </tr>
+                      <?php } ?>
+                      
+                      
                     </tbody>
                   </table>
                 </div>

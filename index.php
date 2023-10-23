@@ -1,7 +1,7 @@
 	<?php
+	session_start();
 	require_once "includes/connec.php";
 	// error_reporting(0);
-	session_start();
 	?>
 	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
@@ -36,16 +36,19 @@
 		<link rel="stylesheet" href="css/owl.carousel.css">
 		<link rel="stylesheet" href="css/main.css">
 	</head>
+     
+	
 
 	<body>
 		<header id="header">
 			<?php 
-			 if($_SESSION['user_email']){
-				 require_once "includes/after_signin_header.php";
-			}else{
-				 require_once "includes/before_signin_header.php";
+			$session = $_SESSION['user_email'] ?? '';
+			if($session){
+				require_once "includes/after_signin_header.php";
+		   }else{
+				require_once "includes/before_signin_header.php";
 
-			 }
+			}
 			?>
 			<div class=" main-menu">
 				<div class="row align-items-center justify-content-between d-flex">
@@ -54,12 +57,20 @@
 					</div>
 					<nav id="nav-menu-container">
 						<ul class="nav-menu">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
+							<li><a href="index.php">Home</a></li>
 							<li><a href="packages.html">Tour Packages</a></li>
 							<li><a href="hotels.html">Terms of Use</a></li>
+							<li><a href="hotels.html">Privacy Policy</a></li>
 							<li><a href="insurance.html">Contact Us</a></li>
-							<li class="menu-has-children"><a href="">Write us</a> </li>
+							<li><a href="about.html">About</a></li>
+							<?php 
+
+							if($session){ ?>
+								<li class="menu-has-children"><a href="#">Write us</a> </li>
+						<?php	}else{ ?>
+							   <li class="menu-has-children"><a href="enquiry.php">Enquiry</a> </li>
+						<?php	} ?>
+							?>
 
 						</ul>
 					</nav><!-- #nav-menu-container -->
@@ -85,12 +96,16 @@
 			</div>
 		</section>
 
+	
 		<!-- modal start here -->
-		 <?php require_once "includes/modal.php" ?>
+		 <?php require_once "includes/sign&register_modal.php" ?>
 		 <?php require_once "includes/logout_modal.php" ?>
+		 <?php require_once "includes/myprofile_modal.php" ?>
+		 <?php require_once "includes/change_password_user_modal.php" ?>
 
 		<!-- modal end here -->
 		
+		<!-- tour package start here -->
 		<section class="destinations-area section-gap">
 			<div class="container mt-4">
 				<div class="row d-flex justify-content-center">
@@ -152,7 +167,7 @@
 				</div>
 			</div>
 		</section>
-		<!-- End destinations Area -->
+		<!--  tour package end here -->
 
 		
 
@@ -307,30 +322,11 @@
 		<!-- End home-about Area -->
 
 
-		<!-- Start blog Area -->
+	
 
-		<!-- End recent-blog Area -->
-
-		<!-- start footer Area -->
-		<footer class="footer-area section-gap">
-			<div class="container">
-
-
-				<div class="row footer-bottom d-flex justify-content-between align-items-center">
-					<p class="col-lg-8 col-sm-12 footer-text m-0">
-						Copyright &copy;<script>
-							document.write(new Date().getFullYear());
-						</script> All rights reserved |Enjoy your Tour with us </p>
-					<div class="col-lg-4 col-sm-12 footer-social">
-						<a href="#"><i class="fa fa-"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-dribbble"></i></a>
-						<a href="#"><i class="fa fa-behance"></i></a>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- End footer Area -->
+	
+	 
+		<?php require_once "includes/footer.php";?>
 
 		<script src="js/vendor/jquery-2.2.4.min.js"></script>
 		<script src="js/popper.min.js"></script>
@@ -346,6 +342,21 @@
 		<script src="js/owl.carousel.min.js"></script>
 		<script src="js/mail-script.js"></script>
 		<script src="js/main.js"></script>
+
+      <?php if($_SESSION['user_profile_update_data']) {?>
+       <script>
+
+		 (function($){
+						$('#myprofile_user').modal('show');
+			let userProfileUpdateDiv = document.getElementById("user_profile_update");
+			userProfileUpdateDiv.innerHTML = "<?= $_SESSION['profile_data_update'] ?> ";
+			}
+		)(jQuery);
+		
+	  </script>  
+	  <?php 
+	   unset ($_SESSION['user_profile_update_data']); }
+	    ?>
 	</body>
 
 	</html>
