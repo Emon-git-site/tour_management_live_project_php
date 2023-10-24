@@ -48,6 +48,18 @@ if(!$_SESSION['authenticate_admin_name']){
                 <div class="card-header py-3 ">
                   <h6 class="m-0 font-weight-bold text-primary"></h6>
                 </div>
+                <?php
+                if(isset($_SESSION['quirey_read'])){ ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>hello!</strong> <?= $_SESSION['quirey_read']; ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div> <?php
+                    unset($_SESSION['quirey_read']);
+                }
+                ?>
+
                 <div class="table-responsive">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
@@ -64,11 +76,7 @@ if(!$_SESSION['authenticate_admin_name']){
                     <tbody>
                     <?php
                       require_once "../includes/connec.php";
-                      if(isset($_GET['id'])){
-                       $id = base64_decode($_GET['id']);
-                       $status =1;
-                        $update_query = "UPDATE `inquiry` SET `status`='$status' WHERE `id`= $id";
-                        $update_query_run = mysqli_query($con, $update_query); }
+                     
                       // enquiry data show
                       $select_query_data = "SELECT * FROM `inquiry`";
                       $select_query_data_run = mysqli_query($con, $select_query_data);
@@ -83,7 +91,7 @@ if(!$_SESSION['authenticate_admin_name']){
                               <td><?= $row['postindate'] ?></td>
                               <?php
                               if($row['status'] == 0){ ?> <!-- Corrected the if statement here -->
-                                  <td><a href="?id=<?=base64_encode($row['id']) ?>" onclick="return confirm('Do you want to read ?')">pending</a></td>
+                                  <td><a href="functions/enquiry_read.php?id=<?=base64_encode($row['id']) ?>" onclick="return confirm('Do you want to read ?')">pending</a></td>
                                   <?php } else{ ?>
                                     <td><a href="?id=<?=base64_encode($row['id']) ?>" >read</a></td>
                               <?php } ?>
