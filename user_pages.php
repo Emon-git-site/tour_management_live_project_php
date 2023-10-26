@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once "includes/connec.php";
-// error_reporting(0);
+$type = $_GET['type']
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -56,7 +57,7 @@ require_once "includes/connec.php";
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                            <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
 							<li><a href="packages.html">Tour Packages</a></li>
 							<li><a href="user_pages.php?type=terms">Terms of Use</a></li>
 							<li><a href="user_pages.php?type=privacy">Privacy Policy</a></li>
@@ -94,7 +95,16 @@ require_once "includes/connec.php";
             </div>
         </div>
     </section>
-
+    <!-- different page content show here start -->
+     <div class="container ">
+         <?php
+         $select_page_query = "SELECT * FROM `pages` WHERE `type` ='$type' " ;
+         $select_page_query_run = mysqli_query($con, $select_page_query) ;
+         $row = mysqli_fetch_assoc($select_page_query_run); ?>
+           <p><?= $row['details'] ?></p>
+    
+     </div>
+        <!-- different page content show here end -->
 
     <!-- modal start here -->
     <?php require_once "includes/sign&register_modal.php" ?>
@@ -105,65 +115,7 @@ require_once "includes/connec.php";
 
     <!-- modal end here -->
 
-
-    <!-- enquiry table  start-->
-
-
-    <div class="container my-4">
-        <div class="row">
-            <div class="col-lg-6 mx-auto">
-                <!-- Form Basic -->
-                <div class="card mb-4">
-                    <div class="card-header py-3 ">
-                        <h6 class="m-0 font-weight-bold text-primary text-center">Enquiry Form Password</h6>
-                    </div>
-                    <div class="card-body">
-                    <?php
-                      
-                    if (isset($_SESSION['enquiry_message'])) { ?>
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>hello!</strong> <?= $_SESSION['enquiry_message']; ?>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div> <?php
-                                unset($_SESSION['enquiry_message']);
-                            }
-                                ?>
-                        <form action="functions/enqiry_datainsert.php" method="post">
-                            <div class="form-group">
-                                <label for="full_name">Full Name</label>
-                                <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Enter full name">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter valid email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your
-                                    email with anyone else.</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="mobile_number">Mobile number</label>
-                                <input type="number" class="form-control" id="mobile_number" name="mobile_number" placeholder="11 Digit mobile number">
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter subject">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="4" cols="10"></textarea>
-                            </div>
-
-                            <button type="submit" name="submit_quiry_btn" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- enquiry table end -->
-
+  
 
 
 

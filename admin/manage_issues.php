@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../includes/connec.php";
 if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 }
@@ -32,7 +33,7 @@ if(!$_SESSION['authenticate_admin_name']){
         <!-- Topbar -->
 
         <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
+        <div class="container-fluid" id="container-wrapper" style="height: 80vh;">
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Manage Issues</h1>
             <ol class="breadcrumb">
@@ -61,6 +62,24 @@ if(!$_SESSION['authenticate_admin_name']){
                         <th>ACTION</th>
                       </tr>
                     </thead>
+                    <?php
+                    $select_query = "SELECT issue.id as id, user.fullname as fullname, user.mobile as mobile, user.email as email, issue.issue as issue, 
+                    issue.description as describ, issue.postingdate as postingdate  FROM user  JOIN issue  ON user.email = issue.useremail ";
+                  
+                    $select_query_run = mysqli_query($con, $select_query);
+                    while( $row = (mysqli_fetch_assoc($select_query_run))){ ?>
+                      <tr>
+                      <td>00<?= $row['id'] ?></td> 
+                      <td><?= $row['fullname'] ?></td> 
+                      <td><?= $row['mobile'] ?></td> 
+                      <td><?= $row['email'] ?></td> 
+                      <td><?= $row['issue'] ?></td> 
+                      <td><?= $row['describ'] ?></td> 
+                      <td><?= $row['postingdate'] ?></td> 
+                      <td><a class="btn btn-primary" href="#" style="text-decoration: none">view</a></td>
+
+                      </tr>
+                 <?php   }   ?>
                     <tbody>
               
                     </tbody>

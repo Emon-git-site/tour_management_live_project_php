@@ -32,7 +32,7 @@ if(!$_SESSION['authenticate_admin_name']){
         <!-- Topbar -->
 
         <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
+        <div class="container-fluid" id="container-wrapper" style="height: 80vh;">
          <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Manage Enquiries</h1>
             <ol class="breadcrumb">
@@ -90,7 +90,7 @@ if(!$_SESSION['authenticate_admin_name']){
                               <td><?= $row['description'] ?></td>
                               <td><?= $row['postindate'] ?></td>
                               <?php
-                              if($row['status'] == 0){ ?> <!-- Corrected the if statement here -->
+                              if($row['status'] == 0){ ?> 
                                   <td><a href="functions/enquiry_read.php?id=<?=base64_encode($row['id']) ?>" onclick="return confirm('Do you want to read ?')">pending</a></td>
                                   <?php } else{ ?>
                                     <td><a href="?id=<?=base64_encode($row['id']) ?>" >read</a></td>

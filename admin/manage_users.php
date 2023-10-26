@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../includes/connec.php";
 if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 }
@@ -32,7 +33,7 @@ if(!$_SESSION['authenticate_admin_name']){
         <!-- Topbar -->
 
         <!-- Container Fluid-->
-        <div class="container-fluid" id="container-wrapper">
+        <div class="container-fluid" id="container-wrapper" style="height: 80vh;">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Manage Users</h1>
             <ol class="breadcrumb">
@@ -61,7 +62,21 @@ if(!$_SESSION['authenticate_admin_name']){
                       </tr>
                     </thead>
                     <tbody>
-              
+                      <?php 
+                    // enquiry data show
+                      $select_query_data = "SELECT * FROM `user`";
+                      $select_query_data_run = mysqli_query($con, $select_query_data);
+                     $count = 1;
+                      while($row = mysqli_fetch_assoc($select_query_data_run)){ ?>
+                          <tr>
+                          <td><?= $count ?></td>
+                          <td><?= $row['fullname'] ?></td>
+                          <td><?= $row['mobile'] ?></td>
+                          <td><?= $row['email'] ?></td>
+                          <td><?= $row['regdate'] ?></td>
+                          <td><?= $row['updatedate'] ?></td>
+                            </tr>
+                          <?php $count++ ; } ?>
                     </tbody>
                   </table>
                 </div>
