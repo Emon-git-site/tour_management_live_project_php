@@ -280,6 +280,7 @@ require_once "includes/connec.php";
     </script>
     <?php
     unset($_SESSION['user_profile_update_data']);
+    }
     ?>
 </body>
 
