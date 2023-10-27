@@ -222,10 +222,11 @@ require_once "includes/connec.php";
                                     </div>
                                     <?php 
                                         $user_email = $_SESSION['user_email'] ?? '';
-                                        if($user_email){ ?>
+                                   
+                                        if(!empty($user_email)){ ?>
                                             <button  type="submit" name="package_book_btn" class="btn btn-outline-success">Book Now</button>
                                    <?php     }else{ ?>
-                                            <button  name="package_book_btn" class="btn btn-outline-success" data-toggle="modal" data-target="#signin_modal">Book Now</button>
+                                            <a href="#"   class="btn btn-outline-success" data-toggle="modal" data-target="#signin_modal">Book Now</a>
                                      <?php   } ?>
                                 </form>
                             </div>
@@ -269,6 +270,7 @@ require_once "includes/connec.php";
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
 
+    <?php if(isset($_SESSION['user_email'])) {?>
     <script>
         (function($) {
             $('#myprofile_user').modal('show');

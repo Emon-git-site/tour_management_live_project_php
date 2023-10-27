@@ -347,7 +347,7 @@
 		<script src="js/mail-script.js"></script>
 		<script src="js/main.js"></script>
 
-      <?php if($_SESSION['user_profile_update_data']) {?>
+      <?php if(isset($_SESSION['user_profile_update'])) {?>
        <script>
 
 		 (function($){
@@ -359,7 +359,7 @@
 		
 	  </script>  
 	  <?php 
-	   unset ($_SESSION['user_profile_update_data']); }
+	   unset ($_SESSION['user_profile_update']); }
 	    ?>
 	</body>
 

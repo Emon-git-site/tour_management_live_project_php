@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "includes/connec.php";
 if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 }
@@ -52,7 +53,14 @@ if(!$_SESSION['authenticate_admin_name']){
                   <div class="row align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1"><h4>Users</h4></div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php
+                         $select_user_query = "SELECT * FROM `user` ";
+                         $select_user_query_run = mysqli_query($con, $select_user_query);
+                         $user_number = mysqli_num_rows($select_user_query_run);
+                         echo "$user_number";
+                        ?>
+                      </div>
                     </div>
                     <div class="col-auto">
                     <i class="fas fa-user fa-2x text-info"></i>
@@ -68,7 +76,14 @@ if(!$_SESSION['authenticate_admin_name']){
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1"><h4>Bookings</h4></div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php
+                         $select_booking_query = "SELECT * FROM `booking` ";
+                         $select_booking_query_run = mysqli_query($con, $select_booking_query);
+                         $booking_number = mysqli_num_rows($select_booking_query_run);
+                         echo "$booking_number";
+                        ?>
+                      </div>
                     </div>
                     <div class="col-auto">
                     <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i>
@@ -84,7 +99,14 @@ if(!$_SESSION['authenticate_admin_name']){
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1"><h4>Enquiries</h4></div>
-                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                      <?php
+                         $select_enquiry_query = "SELECT * FROM `inquiry` ";
+                         $select_enquiry_query_run = mysqli_query($con, $select_enquiry_query);
+                         $enquiry_number = mysqli_num_rows($select_enquiry_query_run);
+                         echo "$enquiry_number";
+                        ?>
+                      </div>
                     </div>
                     <div class="col-auto">
                     <i class="fa fa-folder-open fa-2x" aria-hidden="true"></i>
@@ -100,7 +122,14 @@ if(!$_SESSION['authenticate_admin_name']){
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase mb-1"><h4>Total Packages</h4></div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php
+                         $select_tour_package_query = "SELECT * FROM `tourpackages` ";
+                         $select_tour_package_query_run = mysqli_query($con, $select_tour_package_query);
+                         $tour_package_number = mysqli_num_rows($select_tour_package_query_run);
+                         echo "$tour_package_number";
+                        ?>
+                      </div>
                     </div>
                     <div class="col-auto">
                     <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
@@ -116,7 +145,14 @@ if(!$_SESSION['authenticate_admin_name']){
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-uppercase  mb-1"><h4>Issues Riaised</h4></div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      <?php
+                         $select_issue_query = "SELECT * FROM `issue` ";
+                         $select_issue_query_run = mysqli_query($con, $select_issue_query);
+                         $issue_number = mysqli_num_rows($select_issue_query_run);
+                         echo "$tour_package_number";
+                        ?>
+                      </div>
                      </div>
                     <div class="col-auto">
                     <i class="fa fa-folder-open fa-2x" aria-hidden="true"></i>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../includes/connec.php";
 if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');
 }
@@ -42,7 +43,7 @@ if(!$_SESSION['authenticate_admin_name']){
           </div>
 
 
-          <div class="row mb-4 justify-content-center">
+          <div class="row mb-4 justify-content-center container-fluid m-0 p-0">
               <!-- Simple Tables -->
              <div class="card">
                 <div class="card-header py-3 ">
@@ -52,19 +53,55 @@ if(!$_SESSION['authenticate_admin_name']){
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th>BOOKING ID</th>
-                        <th>NAME</th>
-                        <th>MOBILE NO</th>
-                        <th>EMAIL ID</th>
-                        <th>REGDATE</th>
-                        <th>FROM/TO</th>
-                        <th>COMMENT</th>
-                        <th>STATUS</th>
-                        <th>ACTION</th>
+                        <th class="text-center">BOOKING ID</th>
+                        <th class="text-center">PACKAGE ID</th>
+                        <th class="text-center">PACKAGE NAME</th>
+                        <th class="text-center">MOBILE NO</th>
+                        <th class="text-center">FROM date</th>
+                        <th class="text-center">END date</th>
+                        <th class="text-center">STATUS</th>
+                        <th class="text-center">ACTION</th>
                       </tr>
                     </thead>
                     <tbody>
-              
+                    <?php
+                    $select_booking_query = "SELECT booking.id as bkid, booking.packageid as packageid, booking.updatedate as canceldate, booking.useremail as uemail, booking.status as pstatus, booking.cancellby as cancellby, 
+                    booking.fromdate as fdate, booking.enddate as edate, tourpackages.packagename as pname,  tourpackages.packagelocation as plocation, user.fullname as uname, user.mobile as mobile FROM booking JOIN tourpackages ON 
+                    booking.packageid = tourpackages.id JOIN user ON booking.useremail = user.email ";
+                     $select_booking_query_run = mysqli_query($con , $select_booking_query);
+                     while($row = mysqli_fetch_assoc($select_booking_query_run)){?>
+                     <tr>
+                      <td class="text-center">#BK<?= $row['bkid']?></td>
+                      <td class="text-center">#PK<?= $row['packageid']?></td>
+                      <td class="text-center"><?= $row['pname']?></td>
+                      <td class="text-center"><?= $row['mobile']?></td>
+                      <td class="text-center"><?= $row['fdate']?></td>
+                      <td class="text-center"><?= $row['edate']?></td>
+                      <td class="text-center">
+                       <?php 
+                        $canceldate = $row['canceldate'];
+                        $date = strtotime($canceldate);
+                         $date_cancel = date("Y-m-d", $date);
+                        $cancelby = isset($_GET['cancelby']);
+                        if($row['pstatus'] == "cancel" && $cancelby == "admin"){
+                          echo "Package cancel by admin-".$date_cancel;
+                        }
+                        elseif($row['pstatus'] == "confirm"){
+                          echo "Package confirm at-".$date_cancel;
+                        }
+                        else{
+                          echo "pending";
+                        }
+                       ?>
+                      </td>
+                      <td class="text-center">
+                       <?php  if($row['pstatus'] == "pending"){ ?>
+                        <a href="functions/booking_manage_admin.php?bkid=<?= $row['bkid'] ?>&action=cancel" class="btn btn-sm btn-warning"> CANCEL</a>
+                        <a href="functions/booking_manage_admin.php?bkid=<?= $row['bkid'] ?>&action=confirm" class="btn btn-sm btn-primary">CONFIRM</a> <?php } ?>
+                      </td>
+                     </tr>
+                     <?php } ?>
+                    
                     </tbody>
                   </table>
                 </div>

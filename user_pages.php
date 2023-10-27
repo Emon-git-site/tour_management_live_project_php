@@ -140,7 +140,7 @@ $type = $_GET['type']
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
 
-    <?php if ($_SESSION['user_profile_update_data']) { ?>
+    <?php if(isset($_SESSION['user_email'])) {?>
         <script>
             (function($) {
                 $('#myprofile_user').modal('show');

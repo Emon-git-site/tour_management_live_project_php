@@ -58,7 +58,7 @@
 					<nav id="nav-menu-container">
 						<ul class="nav-menu">
 							<li><a href="index.php">Home</a></li>
-							<li><a href="packages.html">Tour Packages</a></li>
+							<li><a href="package_list.php">Tour Packages</a></li>
 							<li><a href="user_pages.php?type=terms">Terms of Use</a></li>
 							<li><a href="user_pages.php?type=privacy">Privacy Policy</a></li>
 							<li><a href="user_pages.php?type=contact">Contact Us</a></li>
@@ -192,7 +192,7 @@
 		<script src="js/mail-script.js"></script>
 		<script src="js/main.js"></script>
 
-      <?php if($_SESSION['user_profile_update_data']) {?>
+      <?php if(isset($_SESSION['user_profile_update_data'])) {?>
        <script>
 
 		 (function($){

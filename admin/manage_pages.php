@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting (0);
 require_once "includes/connec.php";
 if(!$_SESSION['authenticate_admin_name']){
   header('location: index.php');

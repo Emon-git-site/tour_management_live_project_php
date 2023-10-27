@@ -12,7 +12,7 @@ if(isset($_POST['package_book_btn'])){
     $Start_date = mysqli_escape_string($con, $_POST['Start_date']);
     $package_id = $row['id'];
     $tour_duration = $row['packageduration'];
-    $status = 0;
+    $status = "pending";
  
     $insert_query = "INSERT INTO `booking`(`packageid`,`useremail`, `fromdate`, `enddate`,  `status`)
                    VALUES ('$package_id', '$user_email', '$Start_date', DATE_ADD('$Start_date', INTERVAL '$tour_duration' DAY), '$status') ";
