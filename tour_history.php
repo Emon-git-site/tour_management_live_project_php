@@ -105,7 +105,7 @@ require_once "includes/connec.php";
     <?php require_once "includes/user_write_modal.php" ?>
 
     <!-- modal end here -->
-    <div class="container mx-0">
+    <div class="container">
         <div class="row my-4 justify-content-center container-fluid mx-auto">
             <!-- Simple Tables -->
             <div class="card">
@@ -194,7 +194,7 @@ require_once "includes/connec.php";
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
 
-    <?php if(isset($_SESSION['user_email'])) {?>
+    <?php if(isset($_SESSION['user_profile_update_data'])) {?>
         <script>
             (function($) {
                 $('#myprofile_user').modal('show');

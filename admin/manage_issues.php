@@ -68,7 +68,8 @@ if (!$_SESSION['authenticate_admin_name']) {
                     issue.description as describ, issue.postingdate as postingdate, issue.adminremark as adminremark  FROM user  JOIN issue  ON user.email = issue.useremail ";
 
                     $select_query_run = mysqli_query($con, $select_query);
-                    while ($row = (mysqli_fetch_assoc($select_query_run))) { ?>
+                    while ($row = (mysqli_fetch_assoc($select_query_run))) {
+                    ?>
                       <tr>
                         <td>00<?= $row['id'] ?></td>
                         <td><?= $row['fullname'] ?></td>
@@ -78,34 +79,35 @@ if (!$_SESSION['authenticate_admin_name']) {
                         <td><?= $row['describ'] ?></td>
                         <td><?= $row['postingdate'] ?></td>
                         <td>
-                            <a class="btn btn-primary" style="text-decoration: none" href="#" data-toggle="modal" data-target="#admin_remark">view</a>
+                          <a class="btn btn-primary" style="text-decoration: none" href="#" data-toggle="modal" data-target="#admin_remark<?= $row['id'] ?>">UPDATE</a>
                         </td>
                       </tr>
-                      <!--admnin remark modal-->
-                      <div class="modal fade" id="admin_remark" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+                      <!-- admin remark modal -->
+                      <div class="modal fade" id="admin_remark<?= $row['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title " id="exampleModalLabelLogout">Update Remark</h5>
+                              <h5 class="modal-title" id="exampleModalLabelLogout">Update Remark</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
-                              <?php 
-                              if(isset($_POST['issue_update_btn'])){
-                               $remark = mysqli_escape_string($con, $_POST['remark']);
-                              $issue_id = $row['id'] ;
-                               $update_issue = "UPDATE `issue` SET `adminremark`='$remark' WHERE `id` = '$issue_id'";
-                               $update_issue_run = mysqli_query($con, $update_issue); }
+                              <?php
+                              if (isset($_POST['issue_update_btn' . $row['id']])) {
+                                $remark = mysqli_escape_string($con, $_POST['remark' . $row['id']]);
+                                $issue_id = $row['id'];
+                                $update_issue = "UPDATE `issue` SET `adminremark`='$remark' WHERE `id` = '$issue_id'";
+                                $update_issue_run = mysqli_query($con, $update_issue);
+                              }
                               ?>
 
                               <form action="" method="post">
                                 <div class="form-group">
                                   <label for="remark">Remark:</label>
-                                  <textarea class="form-control" id="remark" name="remark" rows="4"><?= $row['adminremark'] ?></textarea>
+                                  <textarea class="form-control" id="remark" name="remark<?= $row['id'] ?>" rows="4"><?= $row['adminremark'] ?></textarea>
                                 </div>
-                                <button type="submit" name="issue_update_btn" class="btn btn-primary">Update</button>
+                                <button type="submit" name="issue_update_btn<?= $row['id'] ?>" class="btn btn-primary">Update</button>
                               </form>
                             </div>
                             <div class="modal-footer">
@@ -114,7 +116,9 @@ if (!$_SESSION['authenticate_admin_name']) {
                           </div>
                         </div>
                       </div>
-                    <?php   }  ?>
+                    <?php
+                    }
+                    ?>
                   </tbody>
                 </table>
               </div>

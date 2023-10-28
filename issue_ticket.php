@@ -106,6 +106,56 @@ require_once "includes/connec.php";
 
     <!-- modal end here -->
 
+    <div class="container">
+        <div class="row my-4 justify-content-center container-fluid mx-auto">
+            <!-- Simple Tables -->
+            <div class="card">
+                <div class="card-header py-3 mx-auto">
+                    <h6 class=" font-weight-bold text-primary ">ISSUE TICKETE</h6>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th class="text-center">Ticket Id</th>
+                                <th class="text-center">User Email</th>
+                                <th class="text-center">Issue</th>
+                                <th class="text-center">Description</th>
+                                <th class="text-center">Admin Remark</th>
+                                <th class="text-center">Posting Date</th>
+                                <th class="text-center">Remark Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                          $count = 1;
+                          $select_issue_query = "SELECT * FROM `issue` ";
+                          $select_issue_query_run = mysqli_query($con, $select_issue_query);
+                          while($row = mysqli_fetch_assoc($select_issue_query_run)){ ?>
+                            <tr>
+                             <td class="text-center">$count</td>
+                            <td class="text-center">#TKT-<?= $row['id']?></td>
+                            <td class="text-center"><?= $row['useremail']?></td>
+                            <td class="text-center"><?= $row['issue']?></td>
+                            <td class="text-center"><?= $row['description']?></td>
+                            <td class="text-center"><?= $row['adminremark']?></td>
+                            <td class="text-center"><?= $row['postingdate']?></td>
+                            <td class="text-center"><?= $row['remarkdate']?></td>
+                             
+                            </tr>
+                            <?php $count++; } ?>
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+
+        <!--Row-->
+
+    </div>
   
     <?php require_once "includes/footer.php"; ?>
 

@@ -58,20 +58,18 @@ $type = $_GET['type']
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
                     <li><a href="index.php">Home</a></li>
-							<li><a href="packages.html">Tour Packages</a></li>
+							<li><a href="package_list.php">Tour Packages</a></li>
 							<li><a href="user_pages.php?type=terms">Terms of Use</a></li>
 							<li><a href="user_pages.php?type=privacy">Privacy Policy</a></li>
 							<li><a href="user_pages.php?type=contact">Contact Us</a></li>
 							<li><a href="user_pages.php?type=about">About</a></li>
-                        <?php
+                            <?php 
 
-                        if ($session) { ?>
-                            <li class="menu-has-children"><a href="#">Write us</a> </li>
-                        <?php    } else { ?>
-                            <li class="menu-has-children"><a href="enquiry.php">Enquiry </a> </li>
-                        <?php    } ?>
-
-
+                        if($session){ ?>
+                            <li class="menu-has-children"><a href="#" data-toggle="modal" data-target="#user_writeus_modal">Write us</a> </li>
+                        <?php	}else{ ?>
+                        <li class="menu-has-children"><a href="enquiry.php">Enquiry</a> </li>
+                        <?php	} ?>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
@@ -140,7 +138,7 @@ $type = $_GET['type']
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
 
-    <?php if(isset($_SESSION['user_email'])) {?>
+    <?php if(isset($_SESSION['user_profile_update_data'])) {?>
         <script>
             (function($) {
                 $('#myprofile_user').modal('show');

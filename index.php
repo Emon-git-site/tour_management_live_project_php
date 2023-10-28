@@ -70,7 +70,7 @@
 						<?php	}else{ ?>
 							   <li class="menu-has-children"><a href="enquiry.php">Enquiry</a> </li>
 						<?php	} ?>
-							?>
+							
 
 						</ul>
 					</nav><!-- #nav-menu-container -->

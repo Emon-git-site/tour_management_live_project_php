@@ -19,12 +19,15 @@ if(isset($_POST['package_book_btn'])){
 
     $insert_query_run = mysqli_query($con, $insert_query);
     if($insert_query_run){ 
-      echo "<script>alert('Package Booking successful');</script>";
-        header('Location: ../package_details.php?id=' . $package_id);
-
+        echo '<script type="text/javascript">
+        alert("Tour package Booking successfully!");
+        window.location.href = "../package_details.php?id=' . $package_id . '";
+      </script>';
     } else {
-        echo '<script>alert("Package Booking failed");</script>';
-        header('Location: ../package_details.php?id=' . $package_id);
+        echo '<script type="text/javascript">
+        alert("Tour package Booking failed!");
+        window.location.href = "../package_details.php?id=' . $package_id . '";
+      </script>';
     }
 }
 

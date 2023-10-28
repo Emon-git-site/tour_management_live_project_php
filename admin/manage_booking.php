@@ -82,12 +82,15 @@ if(!$_SESSION['authenticate_admin_name']){
                         $canceldate = $row['canceldate'];
                         $date = strtotime($canceldate);
                          $date_cancel = date("Y-m-d", $date);
-                        $cancelby = isset($_GET['cancelby']);
-                        if($row['pstatus'] == "cancel" && $cancelby == "admin"){
+                         $cancelby = $row['cancellby'];
+                    
+                        if($row['pstatus'] == "cancel" and $cancelby == "admin"){
                           echo "Package cancel by admin-".$date_cancel;
                         }
                         elseif($row['pstatus'] == "confirm"){
                           echo "Package confirm at-".$date_cancel;
+                        }elseif($row['pstatus'] == "cancel" and $cancelby == "user"){
+                          echo "Package cancel by user-".$date_cancel;
                         }
                         else{
                           echo "pending";
